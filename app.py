@@ -263,20 +263,20 @@ with col1:
         markers=True,
         title="Deplesi Stok"
 )
-
+    
     fig1.update_yaxes(range=[0, stok_awal])
 
-col1, col2 = st.columns([2, 1])
+    col1, col2 = st.columns([3, 1], gap="medium")
 
-with col1:
-    st.plotly_chart(fig1, use_container_width=True)
+    with col1:
+         st.plotly_chart(fig1, use_container_width=True)
 
-with col2:
-    st.write("""
-    **Deplesi stok pada pasar persaingan**
+    with col2:
+         st.markdown("""
+### Deplesi Stok
+Pasar persaingan → ekstraksi agresif → stok turun lebih cepat.
+""")
     
-    Deplesi stok terjadi lebih cepat karena banyak perusahaan melakukan ekstraksi secara agresif untuk memaksimalkan keuntungan. Akibatnya cadangan emas menurun lebih tajam dibanding struktur pasar lainnya.
-    """)
 # =====================================================
 # MONOPOLI
 # =====================================================
@@ -316,17 +316,20 @@ with col2:
         title="Deplesi Stok"
 )
 
-    fig2.update_yaxes(range=[0, stok_awal])
+   fig_monopoli.update_yaxes(range=[0, stok_awal])
 
-    st.plotly_chart(
-        fig2,
-        use_container_width=True
-    )
-    st.write("""
-    Deplesi stok pada pasar monopoli cenderung lebih lambat
-    karena perusahaan mengontrol produksi agar cadangan tetap
-    bertahan lebih lama dan keuntungan jangka panjang tetap terjaga.
-    """)
+   col1, col2 = st.columns([3, 1], gap="medium")
+
+   with col1:
+        st.plotly_chart(fig_monopoli, use_container_width=True)
+
+   with col2:
+        st.markdown("""
+### Deplesi Stok (Monopoli)
+Pada pasar monopoli, hanya ada satu pelaku utama sehingga ekstraksi lebih terkendali.  
+Penurunan stok cenderung lebih lambat karena perusahaan dapat mengatur produksi untuk memaksimalkan umur sumber daya.
+""")
+    
 # =====================================================
 # OLIGOPOLI
 # =====================================================
@@ -366,18 +369,19 @@ with col3:
         title="Deplesi Stok"
 )
 
-    fig3.update_yaxes(range=[0, stok_awal])
+    fig_oligopoli.update_yaxes(range=[0, stok_awal])
 
-    st.plotly_chart(
-        fig3,
-        use_container_width=True
-    )
-        st.write("""
-    Deplesi stok pada pasar oligopoli berada di tengah-tengah
-    karena beberapa perusahaan besar saling mempengaruhi keputusan
-    produksi sehingga eksploitasi tidak seagresif pasar persaingan
-    tetapi juga tidak seketat monopoli.
-    """)
+    col1, col2 = st.columns([3, 1], gap="medium")
+
+    with col1:
+         st.plotly_chart(fig_oligopoli, use_container_width=True)
+
+    with col2:
+         st.markdown("""
+### Deplesi Stok (Oligopoli)
+Pada pasar oligopoli, beberapa perusahaan besar saling bersaing.  
+Ekstraksi tetap cukup agresif, tetapi lebih terkendali dibanding persaingan sempurna karena adanya interdependensi antar pelaku.
+""")
 # =====================================================
 # GREEN PARADOX
 # =====================================================
