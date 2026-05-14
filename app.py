@@ -25,7 +25,6 @@ with col1:
 
 with col2:
     st.title("Simulasi Ekonomi Sumber Daya Emas")
-st.title("Simulasi Ekonomi Sumber Daya Emas")
 
 st.markdown("""
 ### Mata Kuliah
