@@ -235,10 +235,6 @@ st.plotly_chart(
 
 st.dataframe(df_ringkas)
 
-# =====================================================
-# SIMULASI PASAR
-# =====================================================
-
 elif menu == "Simulasi Pasar":
 
     st.header("Perbandingan Struktur Pasar")
