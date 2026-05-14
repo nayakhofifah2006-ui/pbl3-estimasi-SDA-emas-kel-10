@@ -252,7 +252,7 @@ with col1:
     df1 = pd.DataFrame({
         "Tahun": tahun,
         "Sisa Stok": [
-            max(stok_awal - produksi_persaingan*t, 0)
+            max(stok_awal - (produksi_persaingan*(t**1.2)), 0)
             for t in tahun
         ]
     })
@@ -296,7 +296,7 @@ with col2:
     df2 = pd.DataFrame({
         "Tahun": tahun,
         "Sisa Stok": [
-            max(stok_awal - produksi_monopoli*t, 0)
+            max(stok_awal - (produksi_monopoli*(t**0.9)), 0)
             for t in tahun
         ]
     })
@@ -340,7 +340,7 @@ with col3:
     df3 = pd.DataFrame({
         "Tahun": tahun,
         "Sisa Stok": [
-            max(stok_awal - produksi_oligopoli*t, 0)
+            max(stok_awal - (produksi_oligopoli*(t**1.0)), 0)
             for t in tahun
         ]
     })
