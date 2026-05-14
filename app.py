@@ -130,12 +130,6 @@ produksi_monopoli = max(produksi_monopoli, 100)
 produksi_oligopoli = max(produksi_oligopoli, 100)
 
 # =====================================================
-# ESTIMASI WAKTU HABIS
-# =====================================================
-
-waktu_habis = stok_awal / produksi
-
-# =====================================================
 # DATA SIMULASI
 # =====================================================
 
