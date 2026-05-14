@@ -270,7 +270,12 @@ with col1:
         fig1,
         use_container_width=True
     )
-
+    st.write("""
+    Deplesi stok pada pasar persaingan terjadi lebih cepat
+    karena banyak perusahaan melakukan ekstraksi secara agresif
+    untuk memaksimalkan keuntungan. Akibatnya cadangan emas
+    menurun lebih tajam dibanding struktur pasar lainnya.
+    """)
 # =====================================================
 # MONOPOLI
 # =====================================================
@@ -316,7 +321,11 @@ with col2:
         fig2,
         use_container_width=True
     )
-
+    st.write("""
+    Deplesi stok pada pasar monopoli cenderung lebih lambat
+    karena perusahaan mengontrol produksi agar cadangan tetap
+    bertahan lebih lama dan keuntungan jangka panjang tetap terjaga.
+    """)
 # =====================================================
 # OLIGOPOLI
 # =====================================================
@@ -362,6 +371,12 @@ with col3:
         fig3,
         use_container_width=True
     )
+        st.write("""
+    Deplesi stok pada pasar oligopoli berada di tengah-tengah
+    karena beberapa perusahaan besar saling mempengaruhi keputusan
+    produksi sehingga eksploitasi tidak seagresif pasar persaingan
+    tetapi juga tidak seketat monopoli.
+    """)
 # =====================================================
 # GREEN PARADOX
 # =====================================================
