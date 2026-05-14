@@ -274,7 +274,7 @@ with col1:
     # MONOPOLI
     # =====================================================
 
-    with col2:
+with col2:
 
         st.subheader("Monopoli")
 
@@ -313,7 +313,7 @@ with col1:
     # OLIGOPOLI
     # =====================================================
 
-    with col3:
+with col3:
 
         st.subheader("Oligopoli")
 
