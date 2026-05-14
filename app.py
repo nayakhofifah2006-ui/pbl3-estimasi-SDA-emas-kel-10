@@ -169,7 +169,6 @@ col4.metric(
     "Rata-rata Estimasi Habis",
     f"{round(rata_habis,2)} Tahun"
 )
-    )
 
     st.subheader("Penjelasan")
 
