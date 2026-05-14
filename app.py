@@ -206,26 +206,34 @@ if menu == "Dashboard":
 
     st.subheader("Grafik Deplesi Stok")
 
-    fig = px.line(
-        df,
-        x="Tahun",
-        y="Sisa Stok",
-        markers=True,
-        title="Perubahan Sisa Stok Emas"
-    )
+    st.subheader("Perbandingan Estimasi Habis")
 
-    st.plotly_chart(
-        fig,
-        use_container_width=True
-    )
+df_ringkas = pd.DataFrame({
+    "Struktur Pasar": [
+        "Persaingan",
+        "Monopoli",
+        "Oligopoli"
+    ],
+    "Estimasi Habis": [
+        round(waktu_persaingan,2),
+        round(waktu_monopoli,2),
+        round(waktu_oligopoli,2)
+    ]
+})
 
-    # =====================================================
-    # DATA SIMULASI
-    # =====================================================
+fig_ringkas = px.bar(
+    df_ringkas,
+    x="Struktur Pasar",
+    y="Estimasi Habis",
+    title="Perbandingan Estimasi Habis Cadangan"
+)
 
-    st.subheader("Data Simulasi")
+st.plotly_chart(
+    fig_ringkas,
+    use_container_width=True
+)
 
-    st.dataframe(df)
+st.dataframe(df_ringkas)
 
 # =====================================================
 # SIMULASI PASAR
