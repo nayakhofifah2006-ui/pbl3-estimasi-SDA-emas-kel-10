@@ -257,13 +257,15 @@ with col1:
         ]
     })
 
-    fig1.update_yaxes(range=[0, stok_awal])(
-        df1,
-        x="Tahun",
-        y="Sisa Stok",
-        markers=True,
-        title="Deplesi Stok"
-    )
+    fig1 = px.line(
+    df1,
+    x="Tahun",
+    y="Sisa Stok",
+    markers=True,
+    title="Deplesi Stok"
+)
+
+fig1.update_yaxes(range=[0, stok_awal])
 
     st.plotly_chart(
         fig1,
@@ -301,13 +303,15 @@ with col2:
         ]
     })
 
-    fig2.update_yaxes(range=[0, stok_awal])(
-        df2,
-        x="Tahun",
-        y="Sisa Stok",
-        markers=True,
-        title="Deplesi Stok"
-    )
+    fig2 = px.line(
+    df2,
+    x="Tahun",
+    y="Sisa Stok",
+    markers=True,
+    title="Deplesi Stok"
+)
+
+fig2.update_yaxes(range=[0, stok_awal])
 
     st.plotly_chart(
         fig2,
@@ -345,13 +349,15 @@ with col3:
         ]
     })
 
-    fig3.update_yaxes(range=[0, stok_awal])(
-        df3,
-        x="Tahun",
-        y="Sisa Stok",
-        markers=True,
-        title="Deplesi Stok"
-    )
+    fig3 = px.line(
+    df3,
+    x="Tahun",
+    y="Sisa Stok",
+    markers=True,
+    title="Deplesi Stok"
+)
+
+fig3.update_yaxes(range=[0, stok_awal])
 
     st.plotly_chart(
         fig3,
