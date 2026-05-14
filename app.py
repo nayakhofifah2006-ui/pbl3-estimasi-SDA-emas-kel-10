@@ -232,24 +232,24 @@ elif menu == "Simulasi Pasar":
 
     with col1:
 
-        st.subheader("Persaingan")
+    st.subheader("Persaingan")
 
-st.metric(
+    st.metric(
     "Cadangan Awal",
     stok_awal
 )
 
-st.metric(
+    st.metric(
     "Jumlah Produksi",
     round(produksi_persaingan, 2)
 )
 
-st.metric(
+    st.metric(
     "Waktu Habis",
     f"{round(waktu_persaingan,2)} Tahun"
 )
 
-df1 = pd.DataFrame({
+    df1 = pd.DataFrame({
     "Tahun": tahun,
     "Sisa Stok": [
         max(stok_awal - produksi_persaingan*t, 0)
@@ -257,17 +257,17 @@ df1 = pd.DataFrame({
     ]
 })
 
-        fig1 = px.line(
-            df1,
-            x="Tahun",
-            y="Sisa Stok",
-            markers=True,
-            title="Deplesi Stok"
+    fig1 = px.line(
+        df1,
+        x="Tahun",
+        y="Sisa Stok",
+        markers=True,
+        title="Deplesi Stok"
         )
 
-        st.plotly_chart(
-            fig1,
-            use_container_width=True
+    st.plotly_chart(
+        fig1,
+        use_container_width=True
         )
 
     # =====================================================
