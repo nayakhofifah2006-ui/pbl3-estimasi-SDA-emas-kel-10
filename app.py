@@ -229,33 +229,32 @@ elif menu == "Simulasi Pasar":
     # =====================================================
     # PERSAINGAN
     # =====================================================
-
 with col1:
 
     st.subheader("Persaingan")
 
     st.metric(
-    "Cadangan Awal",
-    stok_awal
-)
+        "Cadangan Awal",
+        stok_awal
+    )
 
     st.metric(
-    "Jumlah Produksi",
-    round(produksi_persaingan, 2)
-)
+        "Jumlah Produksi",
+        round(produksi_persaingan, 2)
+    )
 
     st.metric(
-    "Waktu Habis",
-    f"{round(waktu_persaingan,2)} Tahun"
-)
+        "Waktu Habis",
+        f"{round(waktu_persaingan,2)} Tahun"
+    )
 
     df1 = pd.DataFrame({
-    "Tahun": tahun,
-    "Sisa Stok": [
-        max(stok_awal - produksi_persaingan*t, 0)
-        for t in tahun
-    ]
-})
+        "Tahun": tahun,
+        "Sisa Stok": [
+            max(stok_awal - produksi_persaingan*t, 0)
+            for t in tahun
+        ]
+    })
 
     fig1 = px.line(
         df1,
@@ -263,91 +262,100 @@ with col1:
         y="Sisa Stok",
         markers=True,
         title="Deplesi Stok"
-        )
+    )
 
     st.plotly_chart(
         fig1,
         use_container_width=True
-        )
+    )
 
-    # =====================================================
-    # MONOPOLI
-    # =====================================================
+# =====================================================
+# MONOPOLI
+# =====================================================
 
 with col2:
 
-        st.subheader("Monopoli")
+    st.subheader("Monopoli")
 
-        st.metric(
-            "Produksi",
-            round(produksi_monopoli, 2)
-        )
+    st.metric(
+        "Cadangan Awal",
+        stok_awal
+    )
 
-        st.metric(
-            "Waktu Habis",
-            f"{round(waktu_monopoli,2)} Tahun"
-        )
+    st.metric(
+        "Jumlah Produksi",
+        round(produksi_monopoli, 2)
+    )
 
-        df2 = pd.DataFrame({
-            "Tahun": tahun,
-            "Sisa Stok": [
-                max(stok_awal - produksi_monopoli*t, 0)
-                for t in tahun
-            ]
-        })
+    st.metric(
+        "Waktu Habis",
+        f"{round(waktu_monopoli,2)} Tahun"
+    )
 
-        fig2 = px.line(
-            df2,
-            x="Tahun",
-            y="Sisa Stok",
-            markers=True,
-            title="Deplesi Stok"
-        )
+    df2 = pd.DataFrame({
+        "Tahun": tahun,
+        "Sisa Stok": [
+            max(stok_awal - produksi_monopoli*t, 0)
+            for t in tahun
+        ]
+    })
 
-        st.plotly_chart(
-            fig2,
-            use_container_width=True
-        )
+    fig2 = px.line(
+        df2,
+        x="Tahun",
+        y="Sisa Stok",
+        markers=True,
+        title="Deplesi Stok"
+    )
 
-    # =====================================================
-    # OLIGOPOLI
-    # =====================================================
+    st.plotly_chart(
+        fig2,
+        use_container_width=True
+    )
+
+# =====================================================
+# OLIGOPOLI
+# =====================================================
 
 with col3:
 
-        st.subheader("Oligopoli")
+    st.subheader("Oligopoli")
 
-        st.metric(
-            "Produksi",
-            round(produksi_oligopoli, 2)
-        )
+    st.metric(
+        "Cadangan Awal",
+        stok_awal
+    )
 
-        st.metric(
-            "Waktu Habis",
-            f"{round(waktu_oligopoli,2)} Tahun"
-        )
+    st.metric(
+        "Jumlah Produksi",
+        round(produksi_oligopoli, 2)
+    )
 
-        df3 = pd.DataFrame({
-            "Tahun": tahun,
-            "Sisa Stok": [
-                max(stok_awal - produksi_oligopoli*t, 0)
-                for t in tahun
-            ]
-        })
+    st.metric(
+        "Waktu Habis",
+        f"{round(waktu_oligopoli,2)} Tahun"
+    )
 
-        fig3 = px.line(
-            df3,
-            x="Tahun",
-            y="Sisa Stok",
-            markers=True,
-            title="Deplesi Stok"
-        )
+    df3 = pd.DataFrame({
+        "Tahun": tahun,
+        "Sisa Stok": [
+            max(stok_awal - produksi_oligopoli*t, 0)
+            for t in tahun
+        ]
+    })
 
-        st.plotly_chart(
-            fig3,
-            use_container_width=True
-        )
+    fig3 = px.line(
+        df3,
+        x="Tahun",
+        y="Sisa Stok",
+        markers=True,
+        title="Deplesi Stok"
+    )
 
+    st.plotly_chart(
+        fig3,
+        use_container_width=True
+    )
 # =====================================================
 # GREEN PARADOX
 # =====================================================
