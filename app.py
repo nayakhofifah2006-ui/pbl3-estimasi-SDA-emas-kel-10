@@ -217,13 +217,7 @@ elif menu == "Simulasi Pasar":
 
     st.header("Perbandingan Struktur Pasar")
 
-    st.write("""
-    Simulasi ini membandingkan dampak perubahan harga emas,
-    tingkat diskonto, dan Marginal User Cost terhadap
-    tiga struktur pasar sekaligus.
-    """)
-
-    col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns([3, 1], gap="medium")
 
     # =====================================================
     # PERSAINGAN
