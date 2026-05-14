@@ -256,7 +256,7 @@ with col1:
         ]
     })
 
-    fig1 = px.line(
+    fig_persaingan = px.line(
         df1,
         x="Tahun",
         y="Sisa Stok",
@@ -313,7 +313,7 @@ with col2:
         ]
     })
 
-    fig2 = px.line(
+    fig_monopoli = px.line(
         df2,
         x="Tahun",
         y="Sisa Stok",
@@ -368,7 +368,7 @@ with col3:
         ]
     })
 
-    fig3 = px.line(
+    fig_oligopoli = px.line(
         df3,
         x="Tahun",
         y="Sisa Stok",
