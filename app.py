@@ -124,7 +124,7 @@ produksi_oligopoli = max(produksi_oligopoli, 100)
 waktu_persaingan = stok_awal / produksi_persaingan
 waktu_monopoli = stok_awal / produksi_monopoli
 waktu_oligopoli = stok_awal / produksi_oligopoli
-)
+
 # =====================================================
 # BATAS MINIMUM PRODUKSI
 # =====================================================
