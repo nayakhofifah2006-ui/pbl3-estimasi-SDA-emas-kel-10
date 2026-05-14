@@ -290,20 +290,14 @@ with col2:
 
     st.subheader("Monopoli")
 
-    st.metric(
-        "Cadangan Awal",
-        stok_awal
-    )
+col1, col2 = st.columns([3, 1], gap="medium")
 
-    st.metric(
-        "Jumlah Produksi",
-        round(produksi_monopoli, 2)
-    )
+with col1:
+    st.subheader("Monopoli")
 
-    st.metric(
-        "Waktu Habis",
-        f"{round(waktu_monopoli,2)} Tahun"
-    )
+    st.metric("Cadangan Awal", stok_awal)
+    st.metric("Jumlah Produksi", round(produksi_monopoli, 2))
+    st.metric("Waktu Habis", f"{round(waktu_monopoli,2)} Tahun")
 
     df2 = pd.DataFrame({
         "Tahun": tahun,
@@ -318,23 +312,21 @@ with col2:
         x="Tahun",
         y="Sisa Stok",
         markers=True,
-        title="Deplesi Stok"
-)
+        title="Deplesi Stok Monopoli"
+    )
 
-fig_monopoli.update_layout(
-    yaxis=dict(range=[0, stok_awal])
-)
+    fig_monopoli.update_layout(
+        yaxis=dict(range=[0, stok_awal])
+    )
 
-col1, col2 = st.columns([3, 1], gap="medium")
-
-with col1:
     st.plotly_chart(fig_monopoli, use_container_width=True)
+
 
 with col2:
     st.markdown("""
 ### Monopoli
-Hanya satu pelaku utama.  
-Ekstraksi lebih terkontrol → penurunan stok paling lambat.
+Hanya satu pelaku utama sehingga ekstraksi lebih terkontrol.
+Penurunan stok paling lambat dibanding struktur lain.
 """)
     
 # =====================================================
