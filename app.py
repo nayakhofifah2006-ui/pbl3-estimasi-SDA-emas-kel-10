@@ -257,7 +257,7 @@ with col1:
         ]
     })
 
-    fig1 = px.line(
+    fig1.update_yaxes(range=[0, stok_awal])(
         df1,
         x="Tahun",
         y="Sisa Stok",
@@ -301,7 +301,7 @@ with col2:
         ]
     })
 
-    fig2 = px.line(
+    fig2.update_yaxes(range=[0, stok_awal])(
         df2,
         x="Tahun",
         y="Sisa Stok",
@@ -345,7 +345,7 @@ with col3:
         ]
     })
 
-    fig3 = px.line(
+    fig3.update_yaxes(range=[0, stok_awal])(
         df3,
         x="Tahun",
         y="Sisa Stok",
