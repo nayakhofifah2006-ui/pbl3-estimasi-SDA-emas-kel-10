@@ -266,15 +266,16 @@ with col1:
 
     fig1.update_yaxes(range=[0, stok_awal])
 
-    st.plotly_chart(
-        fig1,
-        use_container_width=True
-    )
+col1, col2 = st.columns([2, 1])
+
+with col1:
+    st.plotly_chart(fig1, use_container_width=True)
+
+with col2:
     st.write("""
-    Deplesi stok pada pasar persaingan terjadi lebih cepat
-    karena banyak perusahaan melakukan ekstraksi secara agresif
-    untuk memaksimalkan keuntungan. Akibatnya cadangan emas
-    menurun lebih tajam dibanding struktur pasar lainnya.
+    **Deplesi stok pada pasar persaingan**
+    
+    Deplesi stok terjadi lebih cepat karena banyak perusahaan melakukan ekstraksi secara agresif untuk memaksimalkan keuntungan. Akibatnya cadangan emas menurun lebih tajam dibanding struktur pasar lainnya.
     """)
 # =====================================================
 # MONOPOLI
