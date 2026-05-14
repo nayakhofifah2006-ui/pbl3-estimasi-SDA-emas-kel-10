@@ -264,7 +264,7 @@ with col1:
 
     st.plotly_chart(fig_persaingan, use_container_width=True)
 
-with col1:
+with col2:
     st.markdown("""
 ### Persaingan
 Banyak perusahaan → ekstraksi agresif → stok turun paling cepat.
