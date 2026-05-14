@@ -159,37 +159,19 @@ if menu == "Dashboard":
         "Marginal User Cost",
         f"Rp {muc}"
     )
+
     rata_habis = (
-    waktu_persaingan
-    + waktu_monopoli
-    + waktu_oligopoli
-) / 3
+        waktu_persaingan
+        + waktu_monopoli
+        + waktu_oligopoli
+    ) / 3
 
     col4.metric(
-    "Rata-rata Estimasi Habis",
-    f"{round(rata_habis,2)} Tahun"
-)
+        "Rata-rata Estimasi Habis",
+        f"{round(rata_habis,2)} Tahun"
+    )
 
     st.subheader("Penjelasan")
-
-    st.write("""
-    Dashboard ini menunjukkan hubungan antara harga emas,
-    tingkat diskonto, dan Marginal User Cost terhadap
-    produksi dan keberlanjutan stok sumber daya emas.
-
-    Kenaikan harga emas meningkatkan insentif produksi
-    karena sumber daya menjadi lebih menguntungkan
-    untuk dieksploitasi.
-
-    Tingkat diskonto menggambarkan preferensi terhadap
-    keuntungan saat ini dibandingkan masa depan.
-    Semakin tinggi tingkat diskonto, semakin cepat
-    eksploitasi sumber daya dilakukan.
-
-    Marginal User Cost menunjukkan biaya pengorbanan
-    akibat penggunaan sumber daya pada periode sekarang
-    terhadap ketersediaannya di masa mendatang.
-    """)
 
     st.write("""
     Dashboard ini membandingkan struktur pasar persaingan,
@@ -200,40 +182,34 @@ if menu == "Dashboard":
     serta estimasi habisnya cadangan emas pada masing-masing struktur pasar.
     """)
 
-    # =====================================================
-    # GRAFIK STOK
-    # =====================================================
-
-    st.subheader("Grafik Deplesi Stok")
-
     st.subheader("Perbandingan Estimasi Habis")
 
-df_ringkas = pd.DataFrame({
-    "Struktur Pasar": [
-        "Persaingan",
-        "Monopoli",
-        "Oligopoli"
-    ],
-    "Estimasi Habis": [
-        round(waktu_persaingan,2),
-        round(waktu_monopoli,2),
-        round(waktu_oligopoli,2)
-    ]
-})
+    df_ringkas = pd.DataFrame({
+        "Struktur Pasar": [
+            "Persaingan",
+            "Monopoli",
+            "Oligopoli"
+        ],
+        "Estimasi Habis": [
+            round(waktu_persaingan,2),
+            round(waktu_monopoli,2),
+            round(waktu_oligopoli,2)
+        ]
+    })
 
-fig_ringkas = px.bar(
-    df_ringkas,
-    x="Struktur Pasar",
-    y="Estimasi Habis",
-    title="Perbandingan Estimasi Habis Cadangan"
-)
+    fig_ringkas = px.bar(
+        df_ringkas,
+        x="Struktur Pasar",
+        y="Estimasi Habis",
+        title="Perbandingan Estimasi Habis Cadangan"
+    )
 
-st.plotly_chart(
-    fig_ringkas,
-    use_container_width=True
-)
+    st.plotly_chart(
+        fig_ringkas,
+        use_container_width=True
+    )
 
-st.dataframe(df_ringkas)
+    st.dataframe(df_ringkas)
 
 elif menu == "Simulasi Pasar":
 
@@ -383,7 +359,7 @@ elif menu == "Green Paradox":
     sisa1 = stok_awal
 
     for i in tahun:
-        sisa1 -= (produksi - 20)
+        sisa1 -= (produksi_persaingan - 20)
         if sisa1 < 0:
             sisa1 = 0
         stok_rendah.append(sisa1)
@@ -393,7 +369,7 @@ elif menu == "Green Paradox":
     sisa2 = stok_awal
 
     for i in tahun:
-        sisa2 -= (produksi + 50)
+        sisa2 -= (produksi_monopoli + 50)
         if sisa2 < 0:
             sisa2 = 0
         stok_tinggi.append(sisa2)
