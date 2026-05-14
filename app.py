@@ -217,144 +217,92 @@ elif menu == "Simulasi Pasar":
 
     st.header("Perbandingan Struktur Pasar")
 
+    # =========================
+    # PERSAINGAN
+    # =========================
     col1, col2 = st.columns([3, 1], gap="medium")
 
-    # =====================================================
-    # PERSAINGAN
-    # =====================================================
+    with col1:
+        st.subheader("Persaingan")
 
-with col1:
+        st.metric("Cadangan Awal", stok_awal)
+        st.metric("Jumlah Produksi", round(produksi_persaingan, 2))
+        st.metric("Waktu Habis", f"{round(waktu_persaingan,2)} Tahun")
 
-    st.subheader("Persaingan")
-        
-col1, col2 = st.columns([3, 1], gap="medium")
+        df1 = pd.DataFrame({
+            "Tahun": tahun,
+            "Sisa Stok": [
+                max(stok_awal - (produksi_persaingan*(t**1.2)), 0)
+                for t in tahun
+            ]
+        })
 
-with col1:
-    st.subheader("Persaingan")
+        fig_persaingan = px.line(df1, x="Tahun", y="Sisa Stok", markers=True)
 
-    st.metric("Cadangan Awal", stok_awal)
-    st.metric("Jumlah Produksi", round(produksi_persaingan, 2))
-    st.metric("Waktu Habis", f"{round(waktu_persaingan,2)} Tahun")
+        fig_persaingan.update_layout(yaxis=dict(range=[0, stok_awal]))
 
-    df1 = pd.DataFrame({
-        "Tahun": tahun,
-        "Sisa Stok": [
-            max(stok_awal - (produksi_persaingan*(t**1.2)), 0)
-            for t in tahun
-        ]
-    })
+        st.plotly_chart(fig_persaingan, use_container_width=True)
 
-    fig_persaingan = px.line(
-        df1,
-        x="Tahun",
-        y="Sisa Stok",
-        markers=True,
-        title="Deplesi Stok Persaingan"
-    )
+    with col2:
+        st.markdown("### Persaingan\nStok turun paling cepat.")
 
-    fig_persaingan.update_layout(
-        yaxis=dict(range=[0, stok_awal])
-    )
+    # =========================
+    # MONOPOLI
+    # =========================
+    col1, col2 = st.columns([3, 1], gap="medium")
 
-    st.plotly_chart(fig_persaingan, use_container_width=True)
+    with col1:
+        st.subheader("Monopoli")
 
-with col2:
-    st.markdown("""
-### Persaingan
-Banyak perusahaan → ekstraksi agresif → stok turun paling cepat.
-""")
-    
-# =====================================================
-# MONOPOLI
-# =====================================================
+        st.metric("Cadangan Awal", stok_awal)
+        st.metric("Jumlah Produksi", round(produksi_monopoli, 2))
+        st.metric("Waktu Habis", f"{round(waktu_monopoli,2)} Tahun")
 
-with col2:
+        df2 = pd.DataFrame({
+            "Tahun": tahun,
+            "Sisa Stok": [
+                max(stok_awal - (produksi_monopoli*(t**0.9)), 0)
+                for t in tahun
+            ]
+        })
 
-    st.subheader("Monopoli")
+        fig_monopoli = px.line(df2, x="Tahun", y="Sisa Stok", markers=True)
 
-col1, col2 = st.columns([3, 1], gap="medium")
+        fig_monopoli.update_layout(yaxis=dict(range=[0, stok_awal]))
 
-with col1:
-    st.subheader("Monopoli")
+        st.plotly_chart(fig_monopoli, use_container_width=True)
 
-    st.metric("Cadangan Awal", stok_awal)
-    st.metric("Jumlah Produksi", round(produksi_monopoli, 2))
-    st.metric("Waktu Habis", f"{round(waktu_monopoli,2)} Tahun")
+    with col2:
+        st.markdown("### Monopoli\nStok paling lambat habis.")
 
-    df2 = pd.DataFrame({
-        "Tahun": tahun,
-        "Sisa Stok": [
-            max(stok_awal - (produksi_monopoli*(t**0.9)), 0)
-            for t in tahun
-        ]
-    })
+    # =========================
+    # OLIGOPOLI
+    # =========================
+    col1, col2 = st.columns([3, 1], gap="medium")
 
-    fig_monopoli = px.line(
-        df2,
-        x="Tahun",
-        y="Sisa Stok",
-        markers=True,
-        title="Deplesi Stok Monopoli"
-    )
+    with col1:
+        st.subheader("Oligopoli")
 
-    fig_monopoli.update_layout(
-        yaxis=dict(range=[0, stok_awal])
-    )
+        st.metric("Cadangan Awal", stok_awal)
+        st.metric("Jumlah Produksi", round(produksi_oligopoli, 2))
+        st.metric("Waktu Habis", f"{round(waktu_oligopoli,2)} Tahun")
 
-    st.plotly_chart(fig_monopoli, use_container_width=True)
+        df3 = pd.DataFrame({
+            "Tahun": tahun,
+            "Sisa Stok": [
+                max(stok_awal - (produksi_oligopoli*(t**1.0)), 0)
+                for t in tahun
+            ]
+        })
 
+        fig_oligopoli = px.line(df3, x="Tahun", y="Sisa Stok", markers=True)
 
-with col2:
-    st.markdown("""
-### Monopoli
-Hanya satu pelaku utama sehingga ekstraksi lebih terkontrol.
-Penurunan stok paling lambat dibanding struktur lain.
-""")
-    
-# =====================================================
-# OLIGOPOLI
-# =====================================================
+        fig_oligopoli.update_layout(yaxis=dict(range=[0, stok_awal]))
 
-with col3:
+        st.plotly_chart(fig_oligopoli, use_container_width=True)
 
-    st.subheader("Oligopoli")
-
- col1, col2 = st.columns([3, 1], gap="medium")
-
-with col1:
-    st.subheader("Oligopoli")
-
-    st.metric("Cadangan Awal", stok_awal)
-    st.metric("Jumlah Produksi", round(produksi_oligopoli, 2))
-    st.metric("Waktu Habis", f"{round(waktu_oligopoli,2)} Tahun")
-
-    df3 = pd.DataFrame({
-        "Tahun": tahun,
-        "Sisa Stok": [
-            max(stok_awal - (produksi_oligopoli*(t**1.0)), 0)
-            for t in tahun
-        ]
-    })
-
-    fig_oligopoli = px.line(
-        df3,
-        x="Tahun",
-        y="Sisa Stok",
-        markers=True,
-        title="Deplesi Stok Oligopoli"
-    )
-
-    fig_oligopoli.update_layout(
-        yaxis=dict(range=[0, stok_awal])
-    )
-
-    st.plotly_chart(fig_oligopoli, use_container_width=True)
-
-with col2:
-    st.markdown("""
-### Oligopoli
-Beberapa perusahaan besar → saling bersaing tapi masih terkendali.
-""")
+    with col2:
+        st.markdown("### Oligopoli\nStok moderat, di tengah-tengah.")
 # =====================================================
 # GREEN PARADOX
 # =====================================================
