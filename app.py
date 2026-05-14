@@ -230,7 +230,7 @@ elif menu == "Simulasi Pasar":
     # PERSAINGAN
     # =====================================================
 
-    with col1:
+with col1:
 
     st.subheader("Persaingan")
 
