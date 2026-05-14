@@ -97,20 +97,23 @@ stok_awal = st.sidebar.slider(
 # PRODUKSI MASING-MASING PASAR
 # =====================================================
 
+# Persaingan sempurna → eksploitasi paling tinggi
 produksi_persaingan = (
-    harga * 0.8
-    - discount * 20
-    - muc * 0.1
-)
-
-produksi_monopoli = (
     harga * 1.2
-    - discount * 30
-    - muc * 0.15
+    - discount * 35
+    - muc * 0.08
 )
 
+# Monopoli → eksploitasi lebih lambat
+produksi_monopoli = (
+    harga * 0.7
+    - discount * 15
+    - muc * 0.18
+)
+
+# Oligopoli → di tengah-tengah
 produksi_oligopoli = (
-    harga
+    harga * 0.95
     - discount * 25
     - muc * 0.12
 )
@@ -231,23 +234,28 @@ elif menu == "Simulasi Pasar":
 
         st.subheader("Persaingan")
 
-        st.metric(
-            "Produksi",
-            round(produksi_persaingan, 2)
-        )
+st.metric(
+    "Cadangan Awal",
+    stok_awal
+)
 
-        st.metric(
-            "Waktu Habis",
-            f"{round(waktu_persaingan,2)} Tahun"
-        )
+st.metric(
+    "Jumlah Produksi",
+    round(produksi_persaingan, 2)
+)
 
-        df1 = pd.DataFrame({
-            "Tahun": tahun,
-            "Sisa Stok": [
-                max(stok_awal - produksi_persaingan*t, 0)
-                for t in tahun
-            ]
-        })
+st.metric(
+    "Waktu Habis",
+    f"{round(waktu_persaingan,2)} Tahun"
+)
+
+df1 = pd.DataFrame({
+    "Tahun": tahun,
+    "Sisa Stok": [
+        max(stok_awal - produksi_persaingan*t, 0)
+        for t in tahun
+    ]
+})
 
         fig1 = px.line(
             df1,
