@@ -191,7 +191,14 @@ if menu == "Dashboard":
     terhadap ketersediaannya di masa mendatang.
     """)
 
-    st.write(penjelasan_pasar)
+    st.write("""
+    Dashboard ini membandingkan struktur pasar persaingan,
+    monopoli, dan oligopoli dalam pengelolaan sumber daya emas.
+
+    Perubahan harga emas, tingkat diskonto, dan Marginal User Cost
+    akan mempengaruhi tingkat produksi, deplesi stok,
+    serta estimasi habisnya cadangan emas pada masing-masing struktur pasar.
+    """)
 
     # =====================================================
     # GRAFIK STOK
