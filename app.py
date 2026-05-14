@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+from PIL import Image
 
 # =====================================================
 # PAGE CONFIG
@@ -15,7 +16,15 @@ st.set_page_config(
 # =====================================================
 # HEADER
 # =====================================================
+logo = Image.open("logo_unisba.png")
 
+col1, col2 = st.columns([1,5])
+
+with col1:
+    st.image(logo, width=100)
+
+with col2:
+    st.title("Simulasi Ekonomi Sumber Daya Emas")
 st.title("Simulasi Ekonomi Sumber Daya Emas")
 
 st.markdown("""
@@ -56,14 +65,6 @@ menu = st.sidebar.selectbox(
 )
 
 st.sidebar.subheader("Parameter Simulasi")
-
-market = st.sidebar.selectbox(
-    "Struktur Pasar",
-    [
-        "Persaingan",
-        "Monopoli",
-        "Oligopoli"
-    ]
 )
 
 harga = st.sidebar.slider(
@@ -93,91 +94,38 @@ stok_awal = st.sidebar.slider(
     1000000,
     500000
 )
-
 # =====================================================
-# MODEL PRODUKSI
+# PRODUKSI MASING-MASING PASAR
 # =====================================================
 
-if market == "Persaingan":
+produksi_persaingan = (
+    harga * 0.8
+    - discount * 20
+    - muc * 0.1
+)
 
-    produksi = (
-        harga * 0.8
-        - discount * 20
-        - muc * 0.1
-    )
+produksi_monopoli = (
+    harga * 1.2
+    - discount * 30
+    - muc * 0.15
+)
 
-    penjelasan_pasar = """
-    Pasar persaingan menggambarkan kondisi ketika banyak
-    produsen beroperasi sehingga tidak ada satu perusahaan
-    yang mampu mengendalikan harga pasar.
+produksi_oligopoli = (
+    harga
+    - discount * 25
+    - muc * 0.12
+)
 
-    Dalam kondisi ini, harga terbentuk melalui mekanisme
-    permintaan dan penawaran sehingga produksi cenderung
-    lebih efisien.
+# batas minimum
+produksi_persaingan = max(produksi_persaingan, 100)
+produksi_monopoli = max(produksi_monopoli, 100)
+produksi_oligopoli = max(produksi_oligopoli, 100)
 
-    Kenaikan harga emas meningkatkan insentif produksi,
-    sedangkan kenaikan tingkat diskonto mempercepat
-    eksploitasi sumber daya karena keuntungan saat ini
-    dianggap lebih bernilai dibanding masa depan.
-
-    Marginal User Cost menunjukkan biaya ekonomi akibat
-    berkurangnya cadangan sumber daya untuk periode berikutnya.
-    """
-
-elif market == "Monopoli":
-
-    produksi = (
-        harga * 1.2
-        - discount * 30
-        - muc * 0.15
-    )
-
-    penjelasan_pasar = """
-    Pasar monopoli terjadi ketika satu perusahaan memiliki
-    kekuatan dominan dalam menentukan produksi dan harga.
-
-    Perusahaan monopoli cenderung mengontrol jumlah produksi
-    untuk memperoleh keuntungan maksimum.
-
-    Ketika harga emas meningkat, perusahaan memiliki insentif
-    untuk meningkatkan eksploitasi sumber daya.
-
-    Tingkat diskonto yang tinggi mendorong perusahaan
-    memprioritaskan keuntungan saat ini sehingga
-    deplesi sumber daya menjadi lebih cepat.
-
-    Marginal User Cost mencerminkan nilai sumber daya
-    yang dikorbankan akibat penggunaan saat ini.
-    """
-
-else:
-
-    produksi = (
-        harga
-        - discount * 25
-        - muc * 0.12
-    )
-
-    penjelasan_pasar = """
-    Pasar oligopoli terdiri dari beberapa perusahaan besar
-    yang saling mempengaruhi dalam menentukan produksi
-    dan harga pasar.
-
-    Keputusan produksi dipengaruhi oleh strategi perusahaan lain
-    sehingga tingkat produksi cenderung lebih terkontrol.
-
-    Kenaikan harga emas tetap meningkatkan produksi,
-    namun perusahaan mempertimbangkan stabilitas pasar
-    dan persaingan antar produsen.
-
-    Tingkat diskonto yang tinggi mempercepat eksploitasi
-    sumber daya karena perusahaan lebih fokus pada
-    keuntungan jangka pendek.
-
-    Marginal User Cost menunjukkan biaya ekonomi dari
-    berkurangnya cadangan sumber daya di masa depan.
-    """
-
+# estimasi habis
+waktu_persaingan = stok_awal / produksi_persaingan
+waktu_monopoli = stok_awal / produksi_monopoli
+waktu_oligopoli = stok_awal / produksi_oligopoli
+)
 # =====================================================
 # BATAS MINIMUM PRODUKSI
 # =====================================================
@@ -301,112 +249,132 @@ if menu == "Dashboard":
 
 elif menu == "Simulasi Pasar":
 
-    st.header("Simulasi Struktur Pasar")
+    st.header("Perbandingan Struktur Pasar")
 
-    st.subheader(f"Struktur Pasar: {market}")
+    st.write("""
+    Simulasi ini membandingkan dampak perubahan harga emas,
+    tingkat diskonto, dan Marginal User Cost terhadap
+    tiga struktur pasar sekaligus.
+    """)
 
     col1, col2, col3 = st.columns(3)
 
-    col1.metric(
-        "Produksi",
-        round(produksi, 2)
-    )
+    # =====================================================
+    # PERSAINGAN
+    # =====================================================
 
-    col2.metric(
-        "Jumlah Stok",
-        stok_awal
-    )
+    with col1:
 
-    col3.metric(
-        "Waktu Habis",
-        f"{round(waktu_habis,2)} Tahun"
-    )
+        st.subheader("Persaingan")
 
-    st.subheader("Analisis Struktur Pasar")
-    st.write(penjelasan_pasar)
-
-    # tabel hasil
-    st.subheader("Ringkasan Hasil")
-
-    hasil = pd.DataFrame({
-        "Variabel": [
-            "Harga Emas",
-            "Diskonto",
-            "Marginal User Cost",
+        st.metric(
             "Produksi",
-            "Waktu Habis"
-        ],
-        "Nilai": [
-            harga,
-            f"{discount}%",
-            muc,
-            round(produksi,2),
-            round(waktu_habis,2)
-        ]
-    })
+            round(produksi_persaingan, 2)
+        )
 
-    st.dataframe(hasil)
+        st.metric(
+            "Waktu Habis",
+            f"{round(waktu_persaingan,2)} Tahun"
+        )
 
-    # pie chart
-    st.subheader("Proporsi Produksi dan Sisa Stok")
+        df1 = pd.DataFrame({
+            "Tahun": tahun,
+            "Sisa Stok": [
+                max(stok_awal - produksi_persaingan*t, 0)
+                for t in tahun
+            ]
+        })
 
-    pie_df = pd.DataFrame({
-        "Kategori": ["Produksi", "Sisa Stok"],
-        "Nilai": [produksi, stok_awal - produksi]
-    })
+        fig1 = px.line(
+            df1,
+            x="Tahun",
+            y="Sisa Stok",
+            markers=True,
+            title="Deplesi Stok"
+        )
 
-    fig_pie = px.pie(
-        pie_df,
-        names="Kategori",
-        values="Nilai",
-        title="Komposisi Produksi dan Cadangan"
-    )
-
-    st.plotly_chart(fig_pie, use_container_width=True)
-
-    # interpretasi otomatis
-    st.subheader("Interpretasi")
-
-    if waktu_habis < 150:
-        st.error("Cadangan diperkirakan habis relatif cepat. Risiko deplesi tinggi.")
-    elif waktu_habis < 300:
-        st.warning("Cadangan masih tersedia, namun perlu pengelolaan yang hati-hati.")
-    else:
-        st.success("Cadangan relatif aman dalam jangka panjang.")
-
-    st.subheader("Analisis Struktur Pasar")
-
-    st.write(penjelasan_pasar)
-
-    st.write("""
-    Dampak parameter ekonomi:
-
-    - Harga emas yang lebih tinggi meningkatkan produksi.
-    - Tingkat diskonto yang tinggi mempercepat eksploitasi sumber daya.
-    - Marginal User Cost yang tinggi dapat menekan tingkat produksi.
-    - Produksi yang meningkat menyebabkan stok lebih cepat habis.
-    """)
+        st.plotly_chart(
+            fig1,
+            use_container_width=True
+        )
 
     # =====================================================
-    # GRAFIK PRODUKSI
+    # MONOPOLI
     # =====================================================
 
-    df_prod = pd.DataFrame({
-        "Kategori": ["Produksi"],
-        "Nilai": [produksi]
-    })
+    with col2:
 
-    fig2 = px.bar(
-        df_prod,
-        x="Kategori",
-        y="Nilai",
-        title="Grafik Produksi"
-    )
+        st.subheader("Monopoli")
 
-    st.plotly_chart(
-        fig2,
-        use_container_width=True
-    )
+        st.metric(
+            "Produksi",
+            round(produksi_monopoli, 2)
+        )
+
+        st.metric(
+            "Waktu Habis",
+            f"{round(waktu_monopoli,2)} Tahun"
+        )
+
+        df2 = pd.DataFrame({
+            "Tahun": tahun,
+            "Sisa Stok": [
+                max(stok_awal - produksi_monopoli*t, 0)
+                for t in tahun
+            ]
+        })
+
+        fig2 = px.line(
+            df2,
+            x="Tahun",
+            y="Sisa Stok",
+            markers=True,
+            title="Deplesi Stok"
+        )
+
+        st.plotly_chart(
+            fig2,
+            use_container_width=True
+        )
+
+    # =====================================================
+    # OLIGOPOLI
+    # =====================================================
+
+    with col3:
+
+        st.subheader("Oligopoli")
+
+        st.metric(
+            "Produksi",
+            round(produksi_oligopoli, 2)
+        )
+
+        st.metric(
+            "Waktu Habis",
+            f"{round(waktu_oligopoli,2)} Tahun"
+        )
+
+        df3 = pd.DataFrame({
+            "Tahun": tahun,
+            "Sisa Stok": [
+                max(stok_awal - produksi_oligopoli*t, 0)
+                for t in tahun
+            ]
+        })
+
+        fig3 = px.line(
+            df3,
+            x="Tahun",
+            y="Sisa Stok",
+            markers=True,
+            title="Deplesi Stok"
+        )
+
+        st.plotly_chart(
+            fig3,
+            use_container_width=True
+        )
 
 # =====================================================
 # GREEN PARADOX
