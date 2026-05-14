@@ -135,24 +135,6 @@ produksi_oligopoli = max(produksi_oligopoli, 100)
 
 tahun = np.arange(1, 21)
 
-stok = []
-
-sisa = stok_awal
-
-for t in tahun:
-
-    sisa = sisa - produksi
-
-    if sisa < 0:
-        sisa = 0
-
-    stok.append(sisa)
-
-df = pd.DataFrame({
-    "Tahun": tahun,
-    "Sisa Stok": stok
-})
-
 # =====================================================
 # DASHBOARD
 # =====================================================
