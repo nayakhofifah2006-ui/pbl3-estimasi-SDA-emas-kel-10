@@ -65,7 +65,6 @@ menu = st.sidebar.selectbox(
 )
 
 st.sidebar.subheader("Parameter Simulasi")
-)
 
 harga = st.sidebar.slider(
     "Harga Emas",
