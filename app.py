@@ -159,13 +159,13 @@ if menu == "Dashboard":
         "Marginal User Cost",
         f"Rp {muc}"
     )
-rata_habis = (
+    rata_habis = (
     waktu_persaingan
     + waktu_monopoli
     + waktu_oligopoli
 ) / 3
 
-col4.metric(
+    col4.metric(
     "Rata-rata Estimasi Habis",
     f"{round(rata_habis,2)} Tahun"
 )
