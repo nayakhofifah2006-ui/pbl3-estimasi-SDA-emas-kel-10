@@ -125,12 +125,9 @@ waktu_persaingan = stok_awal / produksi_persaingan
 waktu_monopoli = stok_awal / produksi_monopoli
 waktu_oligopoli = stok_awal / produksi_oligopoli
 
-# =====================================================
-# BATAS MINIMUM PRODUKSI
-# =====================================================
-
-if produksi < 100:
-    produksi = 100
+produksi_persaingan = max(produksi_persaingan, 100)
+produksi_monopoli = max(produksi_monopoli, 100)
+produksi_oligopoli = max(produksi_oligopoli, 100)
 
 # =====================================================
 # ESTIMASI WAKTU HABIS
