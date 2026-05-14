@@ -229,6 +229,7 @@ elif menu == "Simulasi Pasar":
     # =====================================================
     # PERSAINGAN
     # =====================================================
+
 with col1:
 
     st.subheader("Persaingan")
@@ -360,7 +361,7 @@ with col3:
 # GREEN PARADOX
 # =====================================================
 
-elif menu == "Green Paradox":
+if menu == "Green Paradox":
 
     st.header("Analisis Green Paradox")
 
