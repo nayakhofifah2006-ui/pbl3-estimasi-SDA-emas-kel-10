@@ -232,21 +232,15 @@ elif menu == "Simulasi Pasar":
 with col1:
 
     st.subheader("Persaingan")
+        
+col1, col2 = st.columns([3, 1], gap="medium")
 
-    st.metric(
-        "Cadangan Awal",
-        stok_awal
-    )
+with col1:
+    st.subheader("Persaingan")
 
-    st.metric(
-        "Jumlah Produksi",
-        round(produksi_persaingan, 2)
-    )
-
-    st.metric(
-        "Waktu Habis",
-        f"{round(waktu_persaingan,2)} Tahun"
-    )
+    st.metric("Cadangan Awal", stok_awal)
+    st.metric("Jumlah Produksi", round(produksi_persaingan, 2))
+    st.metric("Waktu Habis", f"{round(waktu_persaingan,2)} Tahun")
 
     df1 = pd.DataFrame({
         "Tahun": tahun,
@@ -261,25 +255,19 @@ with col1:
         x="Tahun",
         y="Sisa Stok",
         markers=True,
-        title="Deplesi Stok"
-)
-    
-stok_awal = float(stok_awal)
+        title="Deplesi Stok Persaingan"
+    )
 
-fig_persaingan.update_layout(
-    yaxis=dict(range=[0, stok_awal])
-)
+    fig_persaingan.update_layout(
+        yaxis=dict(range=[0, stok_awal])
+    )
 
-col1, col2 = st.columns([3, 1], gap="medium")
-
-with col1:
     st.plotly_chart(fig_persaingan, use_container_width=True)
 
-with col2:
+with col1:
     st.markdown("""
 ### Persaingan
-Ekstraksi sangat agresif karena banyak perusahaan.  
-Stok turun paling cepat dibanding struktur pasar lain.
+Banyak perusahaan → ekstraksi agresif → stok turun paling cepat.
 """)
     
 # =====================================================
@@ -337,20 +325,14 @@ with col3:
 
     st.subheader("Oligopoli")
 
-    st.metric(
-        "Cadangan Awal",
-        stok_awal
-    )
+ col1, col2 = st.columns([3, 1], gap="medium")
 
-    st.metric(
-        "Jumlah Produksi",
-        round(produksi_oligopoli, 2)
-    )
+with col1:
+    st.subheader("Oligopoli")
 
-    st.metric(
-        "Waktu Habis",
-        f"{round(waktu_oligopoli,2)} Tahun"
-    )
+    st.metric("Cadangan Awal", stok_awal)
+    st.metric("Jumlah Produksi", round(produksi_oligopoli, 2))
+    st.metric("Waktu Habis", f"{round(waktu_oligopoli,2)} Tahun")
 
     df3 = pd.DataFrame({
         "Tahun": tahun,
@@ -365,23 +347,19 @@ with col3:
         x="Tahun",
         y="Sisa Stok",
         markers=True,
-        title="Deplesi Stok"
-)
+        title="Deplesi Stok Oligopoli"
+    )
 
-fig_oligopoli.update_layout(
-    yaxis=dict(range=[0, stok_awal])
-)
+    fig_oligopoli.update_layout(
+        yaxis=dict(range=[0, stok_awal])
+    )
 
-col1, col2 = st.columns([3, 1], gap="medium")
-
-with col1:
     st.plotly_chart(fig_oligopoli, use_container_width=True)
 
 with col2:
     st.markdown("""
 ### Oligopoli
-Beberapa perusahaan besar saling bersaing.  
-Ekstraksi masih cukup agresif, tapi lebih terkendali karena saling mengawasi.
+Beberapa perusahaan besar → saling bersaing tapi masih terkendali.
 """)
 # =====================================================
 # GREEN PARADOX
